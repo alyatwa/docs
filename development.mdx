@@ -1,94 +1,73 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: 'Benchwrk Logger'
+description: 'Send logs to Benchwrk Chrome extension using @benchwrk/logger'
 ---
 
 <Info>
   **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
+  - Node.js version 22 or higher
+  - Benchwrk Chrome extension installed
 </Info>
 
-Follow these steps to install and run Mintlify on your operating system.
+Follow these steps to install and use the @benchwrk/logger package.
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+<Step title="Install the @benchwrk/logger package">
 
 ```bash
-npm i -g mint
+npm install @benchwrk/logger
 ```
 </Step>
 
-<Step title="Preview locally">
+<Step title="Import and initialize the logger">
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+In your JavaScript or TypeScript file, import the Logger and initialize it with your API key:
 
-```bash
-mint dev
+```javascript
+import { Logger } from "@benchwrk/logger";
+
+// Initialize logger with your API key
+const logger = new Logger({ apiKey: "12345" });
 ```
+</Step>
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+<Step title="Log messages">
 
+Use the logger to send logs to the Benchwrk Chrome extension:
+
+```javascript
+// Log messages with different levels
+logger.info("User logged in successfully", { userId: 123 });
+logger.warn("Performance degradation detected");
+```
 </Step>
 </Steps>
 
-## Custom ports
+## Supported log levels
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+- `info`: For general information messages
+- `warn`: For warning messages
+- `error`: For error messages
+- `debug`: For debug information
 
-```bash
-mint dev --port 3333
+## Additional options
+
+You can pass additional metadata as the second parameter to any log method. This metadata will be included in the log sent to the Benchwrk extension.
+
+Example:
+
+```javascript
+logger.error("Database connection failed", { errorCode: 500, userId: 123 });
 ```
-
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
-
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
-
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
-mint broken-links
-```
-
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
+  <Accordion title="Logs not appearing in Benchwrk extension">
+    Ensure the Benchwrk Chrome extension is installed and enabled. Check that the API key is correct and the extension is configured to receive logs from your application.
   </Accordion>
 
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
+  <Accordion title="Installation issues">
+    Make sure you have Node.js 14 or higher installed. Try clearing your npm cache: `npm cache clean --force` and reinstall.
   </Accordion>
 </AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).

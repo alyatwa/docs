@@ -54,6 +54,11 @@
     "global": {
       "anchors": [
         {
+          "anchor": "Chrome extension",
+          "href": "https://chromewebstore.google.com/detail/benchwrk/bbipbannkhfdbiedliabpdiglcboinan",
+          "icon": "chrome"
+        },
+        {
           "anchor": "NPM",
           "href": "https://www.npmjs.com/package/@benchwrk/logger",
           "icon": "book-open-cover"

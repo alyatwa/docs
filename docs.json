@@ -23,6 +23,11 @@
     "global": {
       "anchors": [
         {
+          "anchor": "VSCode extension",
+          "href": "https://marketplace.visualstudio.com/items?itemName=Benchwrk.benchwrk",
+          "icon": "vscode"
+        },
+        {
           "anchor": "Chrome extension",
           "href": "https://chromewebstore.google.com/detail/benchwrk/bbipbannkhfdbiedliabpdiglcboinan",
           "icon": "chrome"
